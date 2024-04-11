@@ -8,13 +8,8 @@ function App() {
 
   const { Dragger } = Upload;
 
-  useEffect(() => {
-    console.log(results)
-  }, [results])
-
   const props = {
     beforeUpload: (file) => {
-      console.log(file)
       const isTxt = file.type === 'text/plain';
       if (!isTxt) {
         message.error(`${file.name} is not a txt file`);
@@ -23,12 +18,11 @@ function App() {
     },
     async onChange(file) {
       let fileList = file.fileList;
-    
+
       try {
         const results = await Promise.all(fileList.map(async (element) => {
           let fileContent = await getFileContent(element.originFileObj);
           fileContent = fileContent.replace(/(\r\n|\n|\r)/gm, "");
-          console.log("file", fileContent);
           if (fileContent) {
             const response = await axios.post('/api/process-file', {
               data: fileContent
@@ -46,11 +40,10 @@ function App() {
       } catch (error) {
         console.error('Error occurred while fetching data:', error);
       }
-    }, 
-    onRemove(file){
-      console.log(file)
+    },
+    onRemove(file) {
       setResults(results.filter(newResult => newResult.fileName != file.name));
-    },     
+    },
     multiple: true
   }
 

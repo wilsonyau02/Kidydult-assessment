@@ -1,7 +1,6 @@
 const express = require("express")
 const bodyParser = require('body-parser');
 const cors = require("cors");
-const { stringify } = require("querystring");
 
 const PORT = process.env.PORT || 3001;
 
@@ -44,12 +43,6 @@ app.post("/api/process-file", (req, res) => {
             let currentWordCount = userMap.get(userName)
             userMap.set(userName, currentWordCount + wordCount)
         }
-
-        console.log("Username: ", userName)
-        console.log("Filecontent: ", fileContent)
-        console.log("Userword: ", userWord)
-
-        console.log(userMap)
     }
 
     const sortedMap = new Map([...userMap.entries()].sort((a, b) => b[1] - a[1]));
