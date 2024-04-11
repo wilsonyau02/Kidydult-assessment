@@ -1,0 +1,12 @@
+.content-div {
+  width: 80%;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.file-upload-div, .results-div {
+  width: 45%;
+  padding: 20px;
+}
